@@ -11,11 +11,12 @@ on:
       - master
       - staging
 
+env:
+  BOT_NAME: GitHub Actions **${{ github.event.repository.html_url }}**
+
 jobs:
   notify:
     runs-on: ubuntu-latest
-
-    bot-name: GitHub Actions **${{ github.event.repository.html_url }}**
 
     steps:
       - uses: actions/checkout@v2
@@ -27,7 +28,7 @@ jobs:
           webhook_id: ${{ secrets.DISCORD_WEBHOOK_ID }}
           webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
           color: "#48f442"
-          username: ${{ env.bot-name }}
+          username: $BOT_NAME
           message: |
             🚀 Novo push na branch **${{ github.ref }}**
 
@@ -46,7 +47,7 @@ jobs:
           webhook_id: ${{ secrets.DISCORD_WEBHOOK_ID }}
           webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
           color: "#48f442"
-          username: ${{ env.bot-name }}
+          username: $BOT_NAME
           message: |
             🎉 Novo Pull request aberto!
 
@@ -69,7 +70,7 @@ jobs:
           webhook_id: ${{ secrets.DISCORD_WEBHOOK_ID }}
           webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
           color: "#48f442"
-          username: ${{ env.bot-name }}
+          username: $BOT_NAME
           message: |
             🚀 Pull request mesclado na master!
 
