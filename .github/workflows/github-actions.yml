@@ -18,6 +18,25 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Send message for push
+        if: github.event_name == 'push'
+        uses: appleboy/discord-action@master
+        with:
+          webhook_id: ${{ secrets.DISCORD_WEBHOOK_ID }}
+          webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
+          color: "#48f442"
+          username: "The Bot"
+          message: |
+            🚀 Novo push na branch **${{ github.ref }}**
+
+            [Repositório](${{
+              github.event.repository.html_url
+            }})
+
+            [Commit](${{
+              github.event.head_commit.url
+            }})
+
       - name: Send message for pull request opened
         if: github.event_name == 'pull_request' && github.event.action == 'opened'
         uses: appleboy/discord-action@master
