@@ -11,12 +11,11 @@ on:
       - master
       - staging
 
-env:
-  BOT_NAME: GitHub Actions **${{ github.event.repository.html_url }}**
-
 jobs:
   notify:
     runs-on: ubuntu-latest
+    env:
+      BOT_NAME: GitHub Actions **${{ github.event.repository.html_url }}**
 
     steps:
       - uses: actions/checkout@v2
