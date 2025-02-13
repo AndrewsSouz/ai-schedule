@@ -5,6 +5,9 @@ from flask import Flask, request
 app = Flask(__name__)
 
 
+@app.route('/schedule')
+def hello_world():
+    return database_handler.get_user_schedule()
 # controller
 @app.route('/schedule', methods=['POST'])
 def hello_name():

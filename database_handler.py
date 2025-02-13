@@ -27,3 +27,11 @@ def insert_user_schedule(schedule):
     )
 
     return response
+
+
+def get_user_schedule():
+    response = dynamo_db.scan(
+        TableName=TABLE_NAME
+    )
+
+    return response['Items']
