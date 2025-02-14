@@ -27,7 +27,7 @@ jobs:
           webhook_id: ${{ secrets.DISCORD_WEBHOOK_ID }}
           webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
           color: "#48f442"
-          username: $BOT_NAME
+          username: ${{ env.BOT_NAME }}
           message: |
             🚀 Novo push na branch **${{ github.ref }}**
 
@@ -46,7 +46,7 @@ jobs:
           webhook_id: ${{ secrets.DISCORD_WEBHOOK_ID }}
           webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
           color: "#48f442"
-          username: $BOT_NAME
+          username: ${{ env.BOT_NAME }}
           message: |
             🎉 Novo Pull request aberto!
 
@@ -69,7 +69,7 @@ jobs:
           webhook_id: ${{ secrets.DISCORD_WEBHOOK_ID }}
           webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
           color: "#48f442"
-          username: $BOT_NAME
+          username: ${{ env.BOT_NAME }}
           message: |
             🚀 Pull request mesclado na master!
 
