@@ -1,6 +1,5 @@
 from flask import Flask
-from controllers.schedule_controller import schedule_bp
-
+from controllers.event_controller import schedule_bp
 
 app = Flask(__name__)
 app.register_blueprint(schedule_bp)

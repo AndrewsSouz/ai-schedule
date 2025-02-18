@@ -2,6 +2,7 @@ import uuid
 from datetime import datetime
 
 import boto3
+
 from config.environment import Environment
 
 dynamo_db = boto3.client(
@@ -11,7 +12,16 @@ dynamo_db = boto3.client(
     region_name="sa-east-1"
 )
 
-TABLE_NAME = "ai-schedule-events"\
+TABLE_NAME = "ai-schedule-events"
+
+
+def get_user_schedule():
+    response = dynamo_db.scan(
+        TableName=TABLE_NAME
+    )
+
+    return response['Items']
+
 
 def insert_user_schedule(event):
     item = {
@@ -32,9 +42,19 @@ def insert_user_schedule(event):
     return response
 
 
-def get_user_schedule():
-    response = dynamo_db.scan(
-        TableName=TABLE_NAME
+def update_user_schedule(event):
+    item = {
+        "id": {"S": event['id']},
+        "title": {"S": event['title']},
+        "description": {"S": event['description']},
+        "start_time": {"S": event['start_time']},
+        "end_time": {"S": event['end_time']},
+        "user_id": {"S": event['user_id']},
+    }
+
+    response = dynamo_db.put_item(
+        TableName=TABLE_NAME,
+        Item=item
     )
 
     return response['Items']
