@@ -57,4 +57,13 @@ def update_user_schedule(event):
         Item=item
     )
 
-    return response['Items']
+    return response
+
+
+def delete_user_schedule(id):
+    response = dynamo_db.delete_item(
+        TableName=TABLE_NAME,
+        Key={"id": {"S": id}}
+    )
+
+    return response
